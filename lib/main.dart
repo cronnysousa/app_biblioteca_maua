@@ -1,5 +1,7 @@
+import 'package:app_biblioteca_maua2/livro_ext.dart';
 import 'package:flutter/material.dart';
 
+import 'card_livro_ext.dart';
 import 'card_livro_sede.dart';
 import 'data/json_conector_livros.dart';
 import 'livro_sede.dart';
@@ -39,7 +41,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
   String pesquisa = '';
   Widget corpo = Text("");
   bool loaded = false;
+  bool listaSedeOuExt = true;
   List<LivroSede>? lista;
+  List<LivroExt>? listaExt;
   String p='';
 
 
@@ -47,6 +51,18 @@ class _PaginaInicialState extends State<PaginaInicial> {
     lista = await JsonConectorLivros.getLivrosSede();
     if (lista != null) {
       setState(() {
+        listaSedeOuExt = true;
+        loaded = true;
+      });
+    }
+  }
+
+  void getDataExt() async {
+
+    listaExt = await JsonConectorLivros.getLivrosExt();
+    if (listaExt != null) {
+      setState(() {
+        listaSedeOuExt = false;
         loaded = true;
       });
     }
@@ -116,6 +132,18 @@ class _PaginaInicialState extends State<PaginaInicial> {
             ListTile(
               leading: Icon(Icons.menu_book, size: 50, color: Colors.brown),
               title: Text("Biblioteca - João Paulo"),
+              onTap: () {
+
+
+                setState(() {
+                  loaded=false;
+                  conteudo = 1;
+                  pesquisa = _txtPesquisa.value.text;
+                  getDataExt();
+
+                });
+                Navigator.pop(context);
+              },
             )
           ],
         ),
@@ -131,7 +159,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
 
               itemCount: lista?.length,
               itemBuilder: (context, index) {
-                return card_livro_sede(lista!.elementAt(index));
+                return listaSedeOuExt? card_livro_sede(lista!.elementAt(index)): card_livro_ext(listaExt!.elementAt(index));
               }
 
               ,

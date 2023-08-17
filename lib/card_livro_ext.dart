@@ -1,12 +1,13 @@
+import 'package:app_biblioteca_maua2/livro_ext.dart';
+import 'package:app_biblioteca_maua2/pagina_livro_extensao.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'pagina_livro_sede.dart';
-import 'livro_sede.dart';
 
-class card_livro_sede extends StatelessWidget {
-  final LivroSede livro;
-  const card_livro_sede(this.livro, {Key? key}) : super(key: key);
+
+class card_livro_ext extends StatelessWidget {
+  final LivroExt livro;
+  const card_livro_ext(this.livro, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class card_livro_sede extends StatelessWidget {
           leading: CachedNetworkImage(
             placeholder: (context, url) =>
             const CircularProgressIndicator(),
-            imageUrl: "https://bibliotecaetecmaua.azurewebsites.net/Content/Images/${livro.imagem}" ,
+            imageUrl: "https://bibliotecaetecmaua.azurewebsites.net/Content/Images/livro.jpg" ,
             width: 50,
           ),
           title:
@@ -39,14 +40,14 @@ class card_livro_sede extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      livro.autorPrincipal,
+                      livro.autor,
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      livro.assuntos,
+                      livro.resumo,
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 10,
@@ -66,9 +67,9 @@ class card_livro_sede extends StatelessWidget {
   }
 }
 
-Route _createRoute(LivroSede livro) {
+Route _createRoute(LivroExt livro) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => PaginaLivroSede(livro),
+    pageBuilder: (context, animation, secondaryAnimation) => PaginaLivroExtensao(livro),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;

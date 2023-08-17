@@ -23,7 +23,7 @@ class PaginaLivroExtensao extends StatelessWidget {
             height: 200,
             placeholder: (context, url) => const CircularProgressIndicator(),
             imageUrl:
-            "https://bibliotecaetecmaua.azurewebsites.net/Content/Images/${livro.imagem}",
+            "https://bibliotecaetecmaua.azurewebsites.net/Content/Images/Livro.jpg",
           ),
           ListTile(
             leading: const Text("Titulo:"),
@@ -31,11 +31,11 @@ class PaginaLivroExtensao extends StatelessWidget {
           ),
           ListTile(
             leading: const Text("Autor:"),
-            title: Text(livro.autorPrincipal),
+            title: Text(livro.autor),
           ),
           ListTile(
             leading: const Text("Assuntos:"),
-            title: Text(livro.assuntos),
+            title: Text(livro.resumo),
           ),
           ListTile(
             leading: const Text("Edicao:"),
@@ -43,19 +43,16 @@ class PaginaLivroExtensao extends StatelessWidget {
           ),
           ListTile(
             leading: const Text("Ano:"),
-            title: Text(livro.ano),
+            title: Text(livro.ano.toString()),
           ),
           ListTile(
             leading: const Text("Editora:"),
             title: Text(livro.editora),
           ),
-          ListTile(
-            leading: const Text("Autores:"),
-            title: Text(livro.autores),
-          ),
+
           ListTile(
             leading: const Text("ISBN ou ISSN:"),
-            title: Text(livro.isbnIssn),
+            title: Text(livro.isbn),
           ),
         ],
       ),
